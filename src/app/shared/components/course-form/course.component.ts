@@ -9,10 +9,10 @@ import {mockedAuthorsList} from "@shared/mocks/mocks";
 
 @Component({
   selector: 'app-course-form',
-  templateUrl: './course-form.component.html',
-  styleUrls: ['./course-form.component.scss'],
+  templateUrl: './course.component.html',
+  styleUrls: ['./course.component.scss'],
 })
-export class CourseFormComponent implements OnInit{
+export class CourseComponent implements OnInit{
   availableAuthors = mockedAuthorsList;
 
   constructor(public fb: FormBuilder, public library: FaIconLibrary) {
