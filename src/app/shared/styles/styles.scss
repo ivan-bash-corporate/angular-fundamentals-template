@@ -3,7 +3,7 @@ $color-gray: #CFCFCF;
 $color-red: #FF0000;
 
 .app-plate {
-    width: 100%;
+    width: calc(100% - 64px);
     min-height: 477px;
     background-color: $color-white;
     border: 1px solid $color-gray;
@@ -26,10 +26,6 @@ $color-red: #FF0000;
 .form {
     &__control {
         margin-bottom: 24px;
-    }
-
-    &__action {
-        margin-top: 54px;
     }
 
     &__text {

@@ -1,28 +1,38 @@
 <h2 class="text-align-center">Registration</h2>
 <div class="app-plate">
-  <div class="registration-form">
-    <div>
-      <div class="form__control">
-        <label for="name">Name</label>
-        <!--Use the name `name` for the form control.-->
-        <input type="text" id="name" placeholder="Input text"/>
-        <span id="nameErrorMessage" class="text-danger">Name is required.</span>
-      </div>
-      <div class="form__control">
-        <!--Use the name `email` for the form control.-->
-        <label for="email">Email</label>
-        <input type="text" id="email" placeholder="Input text"/>
-        <span id="emailErrorMessage" class="text-danger">Email is required.</span>
-      </div>
-      <div class="form__control">
-        <!--Use the name `password` for the form control.-->
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Input text"/>
-        <span id="passwordErrorMessage" class="text-danger">Password is required.</span>
-      </div>
-    </div>
-    <div class="form__action">
-      <app-button></app-button>
-    </div>
-  </div>
+    <form [formGroup]="registrationForm" class="registration-form">
+        <div>
+            <div class="form__control">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Input text" formControlName="name"/>
+                <span *ngIf="registrationForm.get('name')!.invalid && registrationForm.get('name')!.touched" class="text-danger">
+                    Name is required and should be at least 6 characters long.
+                </span>
+            </div>
+
+            <div class="form__control">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Input text" formControlName="email" emailValidator/>
+                <span *ngIf="registrationForm.get('email')!.invalid && registrationForm.get('email')!.touched" class="text-danger">
+                    Email is required and should valid.
+                </span>
+            </div>
+
+            <div class="form__control">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Input text" formControlName="password"/>
+                <span *ngIf="registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched" class="text-danger">
+                    Password is required and should be at least 6 characters long.
+                </span>
+            </div>
+        </div>
+
+        <div class="form__action">
+            <app-button [buttonText]="'Register'"></app-button>
+        </div>
+
+        <div>
+            <p class="text-align-center">If you have an account you may <a>Login</a></p>
+        </div>
+    </form>
 </div>

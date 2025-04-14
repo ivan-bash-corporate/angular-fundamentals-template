@@ -2,9 +2,9 @@
     <app-course-card *ngFor="let course of courses"
                      [course]="course"
                      [isEditMode] ="editable"
-                     (clickOnShow)="show(course)">
+                     (clickOnShow)="show(course.id)">
         <ng-container *ngIf="editable">
-            <app-button (click)="delete(course)"></app-button>
+            <app-button (click)="delete(course.id)"></app-button>
             <app-button (click)="edit(course)"></app-button>
         </ng-container>
     </app-course-card>

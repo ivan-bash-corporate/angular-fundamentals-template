@@ -35,3 +35,25 @@
     cursor: pointer;
   }
 }
+
+.authors-control {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+}
+
+.available-list {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.author-list-item {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+}

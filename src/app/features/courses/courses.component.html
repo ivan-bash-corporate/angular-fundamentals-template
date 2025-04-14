@@ -1,0 +1,14 @@
+<div class="course-page">
+    <div class="course-menu">
+        <app-search class="course-search" [placeholder]="'Input text'" (search)="search($event)"></app-search>
+        <app-button [buttonText]="'Add New Course'" (click)="add()"></app-button>
+    </div>
+
+    <app-courses-list
+            [courses]="courses"
+            (deleteCourse)="delete($event)"
+            (editCourse)="edit($event)"
+            (showCourse)="show($event)"
+    ></app-courses-list>
+</div>
+

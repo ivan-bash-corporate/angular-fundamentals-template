@@ -10,21 +10,19 @@ export class CoursesListComponent {
   @Input() courses: Course[] = [];
   @Input() editable: boolean = false;
 
-  @Output() showCourse: EventEmitter<Course> = new EventEmitter<Course>();
+  @Output() showCourse: EventEmitter<string> = new EventEmitter<string>();
   @Output() editCourse: EventEmitter<Course> = new EventEmitter<Course>();
-  @Output() deleteCourse: EventEmitter<Course> = new EventEmitter<Course>();
+  @Output() deleteCourse: EventEmitter<string> = new EventEmitter<string>();
 
-  show(course: Course) {
-    this.showCourse.emit(course);
+  show(id: string) {
+    this.showCourse.emit(id);
   }
 
   edit(course: Course) {
     this.editCourse.emit(course);
   }
 
-  delete(course: Course) {
-    this.deleteCourse.emit(course);
+  delete(id: string) {
+    this.deleteCourse.emit(id);
   }
-
-  protected readonly event = event;
 }

@@ -1,0 +1,14 @@
+.course-page {
+  padding: 24px;
+}
+
+.course-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.course-search {
+  min-width: 50%;
+}
