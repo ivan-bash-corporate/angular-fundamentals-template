@@ -5,24 +5,27 @@
             <div class="form__control">
                 <label for="name">Name</label>
                 <input type="text" id="name" placeholder="Input text" formControlName="name"/>
-                <span *ngIf="registrationForm.get('name')!.invalid && registrationForm.get('name')!.touched" class="text-danger">
-                    Name is required and should be at least 6 characters long.
+                <span *ngIf="registrationForm.get('name')!.invalid && registrationForm.get('name')!.touched"
+                      id="nameErrorMessage" class="text-danger">
+                    Name is required.
                 </span>
             </div>
 
             <div class="form__control">
                 <label for="email">Email</label>
                 <input type="text" id="email" placeholder="Input text" formControlName="email" emailValidator/>
-                <span *ngIf="registrationForm.get('email')!.invalid && registrationForm.get('email')!.touched" class="text-danger">
-                    Email is required and should valid.
+                <span *ngIf="registrationForm.get('email')!.invalid && registrationForm.get('email')!.touched"
+                      id="emailErrorMessage" class="text-danger">
+                    Email is required.
                 </span>
             </div>
 
             <div class="form__control">
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Input text" formControlName="password"/>
-                <span *ngIf="registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched" class="text-danger">
-                    Password is required and should be at least 6 characters long.
+                <span *ngIf="registrationForm.get('password')!.invalid && registrationForm.get('password')!.touched"
+                      id="passwordErrorMessage" class="text-danger">
+                    Password is required.
                 </span>
             </div>
         </div>

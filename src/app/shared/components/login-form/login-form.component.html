@@ -14,9 +14,9 @@
                             emailValidator
                             #emailRef="ngModel"
                     />
-                    <span *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">
-            Email is required and must be valid.
-          </span>
+                    <span id="emailErrorMessage" *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">
+                        Email is required.
+                    </span>
                 </div>
                 <div class="form__control">
                     <label for="password">Password</label>
@@ -29,8 +29,8 @@
                             required
                             #passwordRef="ngModel"
                     />
-                    <span *ngIf="passwordRef.invalid && passwordRef.touched" class="text-danger">
-                        Password is required (min 6 characters).
+                    <span id="passwordErrorMessage" *ngIf="passwordRef.invalid && passwordRef.touched" class="text-danger">
+                        Password is required.
                     </span>
                 </div>
             </div>

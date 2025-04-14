@@ -57,3 +57,10 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.form__action {
+    display: flex;
+    justify-content: right;
+    margin-top: 16px;
+    gap: 10px;
+}

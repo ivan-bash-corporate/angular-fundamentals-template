@@ -23,8 +23,8 @@ export class CourseFormComponent implements OnInit{
   ngOnInit(): void {
     this.courseForm = this.fb.group({
       title: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(10)]),
-      author: new FormControl('', [Validators.pattern('^[a-zA-Z0-9 ]*$')]),
+      description: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      author: new FormControl('', [Validators.pattern('^[a-zA-Z0-9 ]*$'), Validators.minLength(2)]),
       authors: this.fb.array([]),
       duration: new FormControl('', [Validators.required, Validators.min(0)]),
     });
@@ -71,5 +71,18 @@ export class CourseFormComponent implements OnInit{
     };
     this.availableAuthors.push(author);
     this.authorsArray.removeAt(index);
+  }
+
+  onSubmit() {
+    if (this.courseForm.valid) {
+    } else {
+      this.courseForm.markAllAsTouched();
+    }
+  }
+
+  onCancel() {
+    this.courseForm.reset();
+    this.authorsArray.clear();
+    this.availableAuthors = mockedAuthorsList;
   }
 }

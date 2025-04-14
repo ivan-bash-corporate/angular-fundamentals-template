@@ -1,7 +1,7 @@
 <h2>Course Edit / Create Page</h2>
-<form>
+<form [formGroup]="courseForm">
   <div class="app-plate">
-    <div class="course" [formGroup]="courseForm">
+    <div class="course">
       <h3>Main Info</h3>
       <div class="form__control">
         <label for="title">Title</label>
@@ -39,8 +39,12 @@
                 <h3>Authors</h3>
                 <div class="course__flex">
                     <input type="text" id="author" placeholder="Input text" formControlName="author"/>
-                    <app-button [buttonText]="'Create Author'" (click)="createAuthor()"></app-button>
+                    <app-button id="createAuthor" [buttonText]="'Create Author'" (click)="createAuthor()"></app-button>
                 </div>
+
+                <span *ngIf="courseForm.get('author')?.invalid && courseForm.get('author')?.touched"
+                      id="authorErrorMessage" class="text-danger"
+                >New author should contain only latin letters and numbers.</span>
 
                 <h4>Authors list</h4>
                 <div *ngIf="availableAuthors.length === 0">Authors list is empty</div>
@@ -65,4 +69,9 @@
         </div>
     </div>
   </div>
+
+    <div class="form__action">
+        <app-button [buttonText]="'Cancel'" (click)="onCancel()"></app-button>
+        <app-button [buttonText]="'Create Course'" (click)="onSubmit()"></app-button>
+    </div>
 </form>
