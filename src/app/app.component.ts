@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {mockedCoursesList} from "@shared/mocks/mocks";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'courses-app';
+  protected readonly mockedCoursesList = mockedCoursesList;
 }

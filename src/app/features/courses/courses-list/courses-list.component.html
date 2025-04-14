@@ -1,0 +1,11 @@
+<div *ngIf="courses && courses.length > 0" class="courses-list">
+    <app-course-card *ngFor="let course of courses"
+                     [course]="course"
+                     [isEditMode] ="editable"
+                     (clickOnShow)="show(course)">
+        <ng-container *ngIf="editable">
+            <app-button (click)="delete(course)"></app-button>
+            <app-button (click)="edit(course)"></app-button>
+        </ng-container>
+    </app-course-card>
+</div>
