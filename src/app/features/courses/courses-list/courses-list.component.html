@@ -4,8 +4,8 @@
                      [isEditMode] ="editable"
                      (clickOnShow)="show(course.id)">
         <ng-container *ngIf="editable">
-            <app-button (click)="delete(course.id)"></app-button>
-            <app-button (click)="edit(course)"></app-button>
+            <app-button [iconName]="'trash'" (click)="delete(course.id)"></app-button>
+            <app-button [iconName]="'edit'" (click)="edit(course)"></app-button>
         </ng-container>
     </app-course-card>
 </div>

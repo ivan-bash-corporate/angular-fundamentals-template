@@ -29,17 +29,18 @@
                             required
                             #passwordRef="ngModel"
                     />
-                    <span id="passwordErrorMessage" *ngIf="passwordRef.invalid && passwordRef.touched" class="text-danger">
+                    <span id="passwordErrorMessage"
+                          *ngIf="passwordRef.invalid && passwordRef.touched" class="text-danger">
                         Password is required.
                     </span>
                 </div>
             </div>
             <div>
                 <div class="form__action">
-                    <app-button [buttonText]="'Login'"></app-button>
+                    <app-button [buttonText]="'Login'" (click)="onSubmit()"></app-button>
                 </div>
                 <div class="form__text">
-                    If you don't have an account you may <strong>Registration</strong>
+                    If you don't have an account you may <a routerLink="/registration">Register</a>
                 </div>
             </div>
         </div>

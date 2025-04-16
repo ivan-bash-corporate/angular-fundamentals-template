@@ -8,8 +8,8 @@ import {Course} from "@shared/intarfaces/course.interface";
 })
 
 export class CourseInfoComponent {
-  @Input() course!: Course;
   @Output() backToCourses = new EventEmitter<void>();
+  @Input() course!: Course;
 
   onBack() {
     this.backToCourses.emit();

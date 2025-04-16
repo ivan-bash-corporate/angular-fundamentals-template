@@ -1,0 +1,5 @@
+<app-course-form *ngIf="course"
+                 [course]="course"
+                 (onSubmitForm)="onSubmit($event)"
+                 (onCancelForm)="onCancel()">
+</app-course-form>

@@ -58,11 +58,11 @@
 
             <div class="authors-control-course">
                 <h3>Course Authors</h3>
-                <div formArrayName="authors">
+                <div formArrayName="authors" class="available-list">
                     <div *ngIf="authorsArray.controls.length === 0">Author list is empty</div>
                     <div *ngFor="let ctrl of authorsArray.controls; let i = index" [formGroupName]="i" class="author-list-item">
                         <span>{{ ctrl.get('name')?.value }}</span>
-                        <button type="button" (click)="removeAuthorFromCourse(i)">🗑</button>
+                        <app-button [iconName]="'trash'" (click)="removeAuthorFromCourse(i)">🗑</app-button>
                     </div>
                 </div>
             </div>

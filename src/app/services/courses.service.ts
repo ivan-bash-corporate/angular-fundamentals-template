@@ -1,42 +1,51 @@
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs";
+import {Course} from "@shared/intarfaces/course.interface";
+import {HttpClient} from "@angular/common/http";
+import {RequestResult} from "@app/auth/interfaces/request-result.interface";
+import {Author} from "@shared/intarfaces/author.interface";
+
+const BASE_URL = 'http://localhost:4000';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CoursesService {
-    getAll() {
-        // Add your code here
+    constructor(private client: HttpClient) {}
+
+    getAll(): Observable<RequestResult<Course[]>> {
+        return this.client.get<RequestResult<Course[]>>(`${BASE_URL}/courses/all`);
     }
 
-    createCourse(course: any) { // replace 'any' with the required interface
-        // Add your code here
+    createCourse(course: Course) {
+        return this.client.post<RequestResult<string>>(`${BASE_URL}/courses/add`, course);
     }
 
-    editCourse(id: string, course: any) { // replace 'any' with the required interface
-        // Add your code here
+    editCourse(id: string, course: Course) {
+        return this.client.put<RequestResult<string>>(`${BASE_URL}/courses/${id}`, course);
     }
 
-    getCourse(id: string) {
-        // Add your code here
+    getCourse(id: string): Observable<RequestResult<Course>> {
+        return this.client.get<RequestResult<Course>>(`${BASE_URL}/courses/${id}`);
     }
 
     deleteCourse(id: string) {
-        // Add your code here
+        return this.client.delete<RequestResult<string>>(`${BASE_URL}/courses/${id}`);
     }
 
     filterCourses(value: string) {
-        // Add your code here
+        return this.client.get<RequestResult<Course[]>>(`${BASE_URL}/courses/filter`, {params: {title: value}});
     }
 
     getAllAuthors() {
-        // Add your code here
+        return this.client.get<RequestResult<Author[]>>(`${BASE_URL}/authors/all`);
     }
 
     createAuthor(name: string) {
-        // Add your code here
+        return this.client.post<RequestResult<string>>(`${BASE_URL}/authors/add`, {name});
     }
 
     getAuthorById(id: string) {
-        // Add your code here
+        return this.client.get<RequestResult<Author>>(`${BASE_URL}/authors/${id}`);
     }
 }

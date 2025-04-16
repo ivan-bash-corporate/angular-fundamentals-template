@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
   FormArray,
-  FormBuilder, FormControl, FormGroup, Validators
+  FormBuilder, FormGroup, Validators
 } from '@angular/forms';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import {mockedAuthorsList} from "@shared/mocks/mocks";
+import {Course} from "@shared/intarfaces/course.interface";
+import {Author} from "@shared/intarfaces/author.interface";
+import {CoursesStoreService} from "@app/services/courses-store.service";
 
 @Component({
   selector: 'app-course-form',
@@ -13,21 +15,49 @@ import {mockedAuthorsList} from "@shared/mocks/mocks";
   styleUrls: ['./course.component.scss'],
 })
 export class CourseComponent implements OnInit{
-  availableAuthors = mockedAuthorsList;
+  @Input() course?: Course;
+  @Output() onSubmitForm = new EventEmitter<Course>();
+  @Output() onCancelForm = new EventEmitter<void>();
 
-  constructor(public fb: FormBuilder, public library: FaIconLibrary) {
+  availableAuthors: Author[] = [];
+
+  constructor(public fb: FormBuilder,
+              public library: FaIconLibrary,
+              private store: CoursesStoreService) {
     library.addIconPacks(fas);
   }
   courseForm!: FormGroup;
 
   ngOnInit(): void {
     this.courseForm = this.fb.group({
-      title: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      author: new FormControl('', [Validators.pattern('^[a-zA-Z0-9 ]*$'), Validators.minLength(2)]),
-      authors: this.fb.array([]),
-      duration: new FormControl('', [Validators.required, Validators.min(0)]),
+      title: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['', [Validators.required, Validators.minLength(2)]],
+      duration: [0, [Validators.required, Validators.min(0)]],
+      author: ['', [Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
+      authors: this.fb.array([], [Validators.required]),
     });
+
+
+    this.store.authors$.subscribe((authors: Author[]) => {
+      this.availableAuthors = authors;
+    });
+
+    if (this.course) {
+      this.courseForm.patchValue({
+        title: this.course.title,
+        description: this.course.description,
+        duration: this.course.duration,
+      });
+
+      this.course.authors.forEach((author) => {
+        this.authorsArray.push(
+            this.fb.group({
+              id: [author],
+              name: [this.availableAuthors.find((a) => a.id === author)?.name],
+            })
+        );
+      });
+    }
   }
 
   get authorsArray(): FormArray {
@@ -41,12 +71,7 @@ export class CourseComponent implements OnInit{
       return;
     }
 
-    const newAuthor = {
-      id: Math.random().toString(36).substring(2, 15),
-      name: author.value,
-    };
-
-    this.availableAuthors.push(newAuthor);
+    this.store.createAuthor(author.value)
     author.reset();
   }
 
@@ -75,14 +100,17 @@ export class CourseComponent implements OnInit{
 
   onSubmit() {
     if (this.courseForm.valid) {
+        const courseData : Course = {
+            ...this.courseForm.value,
+            authors: this.authorsArray.value.map((author: { id: string }) => author.id),
+        };
+        this.onSubmitForm.emit(courseData);
     } else {
       this.courseForm.markAllAsTouched();
     }
   }
 
   onCancel() {
-    this.courseForm.reset();
-    this.authorsArray.clear();
-    this.availableAuthors = mockedAuthorsList;
+    this.onCancelForm.emit();
   }
 }

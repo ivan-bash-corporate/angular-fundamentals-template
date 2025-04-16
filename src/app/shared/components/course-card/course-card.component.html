@@ -13,8 +13,8 @@
             <div><b>Created: </b><span class="course-card__date">{{course.creationDate | customDate}}</span></div>
         </div>
         <div class="course-card__info-actions">
-            <app-button [buttonText]="'Show Course'" (click)="showCourse()"></app-button>
             <div class="course-card__buttons">
+                <app-button [buttonText]="'Show Course'" (click)="showCourse()"></app-button>
                 <ng-content *ngIf="isEditMode"></ng-content>
             </div>
         </div>

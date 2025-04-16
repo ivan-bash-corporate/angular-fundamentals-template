@@ -1,11 +1,12 @@
 <div class="course-page">
     <div class="course-menu">
         <app-search class="course-search" [placeholder]="'Input text'" (search)="search($event)"></app-search>
-        <app-button [buttonText]="'Add New Course'" (click)="add()"></app-button>
+        <app-button *ngIf="(this.userStore.isAdmin$ | async)" [buttonText]="'Add New Course'" (click)="add()"></app-button>
     </div>
 
     <app-courses-list
             [courses]="courses"
+            [editable]="(this.userStore.isAdmin$ | async) ?? false"
             (deleteCourse)="delete($event)"
             (editCourse)="edit($event)"
             (showCourse)="show($event)"

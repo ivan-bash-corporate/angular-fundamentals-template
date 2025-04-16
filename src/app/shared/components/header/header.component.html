@@ -1,4 +1,10 @@
 <div class="app-header">
     <img alt="logo" ngSrc="assets/logo.svg" height="48" width="111">
-    <ng-content></ng-content>
+    <div *ngIf="name !== null" class="user-info">
+        <span class="user-name">{{ name || 'Welcome!' }}</span>
+        <app-button
+                [buttonText]="'Logout'"
+                (click)="logout.emit()">
+        </app-button>
+    </div>
 </div>

@@ -1,4 +1,4 @@
 <div class="app-button">
     <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
-    <ng-container>{{ buttonText || 'Click me' }}</ng-container>
+    <ng-container class="text-align-center" *ngIf="!icon && buttonText">{{ buttonText || 'Click me' }}</ng-container>
 </div>
