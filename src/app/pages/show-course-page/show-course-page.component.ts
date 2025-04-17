@@ -22,8 +22,7 @@ export class ShowCoursePage implements OnInit {
       private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-      // id should be type number
-      let id : number = +this.route.snapshot.paramMap.get('id')!;
+      let id = this.route.snapshot.paramMap.get('id')!;
       this.facade.getSingleCourse(id);
   }
 

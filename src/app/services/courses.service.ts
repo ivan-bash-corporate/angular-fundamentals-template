@@ -21,15 +21,15 @@ export class CoursesService {
         return this.client.post<RequestResult<Course>>(`${BASE_URL}/courses/add`, course);
     }
 
-    editCourse(id: number, course: Course) {
+    editCourse(id: string, course: Course) {
         return this.client.put<RequestResult<Course>>(`${BASE_URL}/courses/${id}`, course);
     }
 
-    getCourse(id: number): Observable<RequestResult<Course>> {
+    getCourse(id: string): Observable<RequestResult<Course>> {
         return this.client.get<RequestResult<Course>>(`${BASE_URL}/courses/${id}`);
     }
 
-    deleteCourse(id: number) {
+    deleteCourse(id: string) {
         return this.client.delete<RequestResult<string>>(`${BASE_URL}/courses/${id}`);
     }
 

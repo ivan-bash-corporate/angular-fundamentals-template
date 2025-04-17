@@ -62,7 +62,7 @@ export class CoursesStoreService {
         return this.courses$$.getValue();
     }
 
-    getCourse(id: number): Course | undefined {
+    getCourse(id: string): Course | undefined {
         return this.courses$$.getValue().find((course: Course) => course.id === id);
     }
 
@@ -73,14 +73,14 @@ export class CoursesStoreService {
         });
     }
 
-    editCourse(id: number, course: Course) {
+    editCourse(id: string, course: Course) {
         this.setLoading(true);
         this.service.editCourse(id, course).subscribe(() => {
             this.loadCourses();
         });
     }
 
-    deleteCourse(id: number) {
+    deleteCourse(id: string) {
         this.setLoading(true);
         this.service.deleteCourse(id).subscribe(() => {
             this.loadCourses();

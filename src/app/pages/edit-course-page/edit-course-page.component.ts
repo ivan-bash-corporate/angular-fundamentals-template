@@ -26,7 +26,7 @@ export class EditCoursePage implements OnInit {
       private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    let id = +this.route.snapshot.paramMap.get('id')!;
+    let id = this.route.snapshot.paramMap.get('id')!;
     if (id) {
       this.facade.getSingleCourse(id);
     }

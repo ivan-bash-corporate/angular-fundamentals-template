@@ -10,11 +10,11 @@ export class CoursesListComponent {
   @Input() courses: Course[] = [];
   @Input() editable: boolean = false;
 
-  @Output() showCourse: EventEmitter<number> = new EventEmitter<number>();
+  @Output() showCourse: EventEmitter<string> = new EventEmitter<string>();
   @Output() editCourse: EventEmitter<Course> = new EventEmitter<Course>();
-  @Output() deleteCourse: EventEmitter<number> = new EventEmitter<number>();
+  @Output() deleteCourse: EventEmitter<string> = new EventEmitter<string>();
 
-  show(id: number) {
+  show(id: string) {
     this.showCourse.emit(id);
   }
 
@@ -22,7 +22,7 @@ export class CoursesListComponent {
     this.editCourse.emit(course);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     this.deleteCourse.emit(id);
   }
 }
