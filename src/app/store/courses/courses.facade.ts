@@ -16,7 +16,7 @@ import {CoursesState} from "@app/store/courses/courses.reducer";
     providedIn: 'root',
 })
 export class CoursesStateFacade {
-    constructor(private store: Store<CoursesState>) {}
+    constructor(private store: Store<{ courses: CoursesState; }>) {}
 
     public readonly isAllCoursesLoading$ = this.store.pipe(
         select(fromCourses.isAllCoursesLoadingSelector)
