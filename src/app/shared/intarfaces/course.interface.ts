@@ -1,6 +1,6 @@
 export interface Course {
     duration: number
-    id: string
+    id: number
     title: string
     description: string
     creationDate: string

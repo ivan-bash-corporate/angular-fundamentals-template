@@ -37,11 +37,11 @@ export class CoursesComponent implements OnInit {
     }
   }
 
-  delete(id: string) {
+  delete(id: number) {
     this.facade.deleteCourse(id);
   }
 
-  show(id: string) {
+  show(id: number) {
     this.router.navigate([`/courses/${id}`]);
   }
 
