@@ -1,12 +1,12 @@
-import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, OnInit} from '@angular/core';
 import {Course} from "@shared/intarfaces/course.interface";
 import {Router} from "@angular/router";
 import {CoursesModule} from "@features/courses/courses.module";
 import {SharedModule} from "@shared/shared.module";
-import {CoursesStoreService} from "@app/services/courses-store.service";
-import {Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {UserStoreService} from "@app/user/services/user-store.service";
 import {AsyncPipe, NgIf} from "@angular/common";
+import {CoursesStateFacade} from "@app/store/courses/courses.facade";
 
 @Component({
   standalone: true,
@@ -20,26 +20,25 @@ import {AsyncPipe, NgIf} from "@angular/common";
   ],
   styleUrls: ['./courses.component.css']
 })
-export class CoursesComponent implements OnInit, OnDestroy {
-  protected courses: Course[] = [];
-  private subscription!: Subscription;
+export class CoursesComponent implements OnInit {
+  protected courses: Observable<Course[]> = this.facade.allCourses$;
 
   constructor(private router: Router,
-              private store: CoursesStoreService,
+              private facade: CoursesStateFacade,
               protected userStore: UserStoreService) {}
 
   ngOnInit() {
-    this.subscription = this.store.courses$.subscribe(courses => {
-      this.courses = courses;
-    });
+    this.facade.getAllCourses();
   }
 
   search(searchTerm: string) {
-    this.store.filterCourses(searchTerm);
+    if (searchTerm) {
+      this.facade.getFilteredCourses(searchTerm);
+    }
   }
 
   delete(id: string) {
-    this.store.deleteCourse(id);
+    this.facade.deleteCourse(id);
   }
 
   show(id: string) {
@@ -52,9 +51,5 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   add() {
     this.router.navigate([`/courses/add`]);
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }

@@ -1,5 +1,5 @@
-<app-course-form *ngIf="course"
-                 [course]="course"
+<app-course-form *ngIf="course | async"
+                 [course]="(course | async)!"
                  (onSubmitForm)="onSubmit($event)"
                  (onCancelForm)="onCancel()">
 </app-course-form>

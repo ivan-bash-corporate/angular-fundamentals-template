@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Course} from "@shared/intarfaces/course.interface";
 import {CoursesModule} from "@features/courses/courses.module";
-import {NgIf} from "@angular/common";
-import {CoursesStoreService} from "@app/services/courses-store.service";
+import {AsyncPipe, NgIf} from "@angular/common";
+import {CoursesStateFacade} from "@app/store/courses/courses.facade";
 
 @Component({
     selector: 'app-show-course-page',
@@ -12,20 +11,19 @@ import {CoursesStoreService} from "@app/services/courses-store.service";
     standalone: true,
     imports: [
         CoursesModule,
-        NgIf
+        NgIf,
+        AsyncPipe
     ]
 })
 export class ShowCoursePage implements OnInit {
-  course?: Course;
-
   constructor(
       private router: Router,
-      private store: CoursesStoreService,
+      protected facade: CoursesStateFacade,
       private route: ActivatedRoute) {}
 
   ngOnInit(): void {
       let id = this.route.snapshot.paramMap.get('id')!;
-      this.course = this.store.getCourse(id);
+      this.facade.getSingleCourse(id);
   }
 
   onBack() {

@@ -2,7 +2,7 @@ import {Component, forwardRef} from '@angular/core';
 import {Course} from "@shared/intarfaces/course.interface";
 import {Router} from "@angular/router";
 import {SharedModule} from "@shared/shared.module";
-import {CoursesStoreService} from "@app/services/courses-store.service";
+import {CoursesStateFacade} from "@app/store/courses/courses.facade";
 
 @Component({
   selector: 'app-add-course-page',
@@ -14,12 +14,10 @@ import {CoursesStoreService} from "@app/services/courses-store.service";
   ]
 })
 export class AddCoursePage {
-  course?: Course;
-
-  constructor(private router: Router, private store: CoursesStoreService) {}
+  constructor(private router: Router, private facade: CoursesStateFacade) {}
 
   onSubmitForm(course: Course) {
-    this.store.createCourse(course);
+    this.facade.createCourse(course);
     this.redirectToCourses();
   }
 

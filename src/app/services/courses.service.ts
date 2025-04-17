@@ -18,11 +18,11 @@ export class CoursesService {
     }
 
     createCourse(course: Course) {
-        return this.client.post<RequestResult<string>>(`${BASE_URL}/courses/add`, course);
+        return this.client.post<RequestResult<Course>>(`${BASE_URL}/courses/add`, course);
     }
 
     editCourse(id: string, course: Course) {
-        return this.client.put<RequestResult<string>>(`${BASE_URL}/courses/${id}`, course);
+        return this.client.put<RequestResult<Course>>(`${BASE_URL}/courses/${id}`, course);
     }
 
     getCourse(id: string): Observable<RequestResult<Course>> {
@@ -34,7 +34,9 @@ export class CoursesService {
     }
 
     filterCourses(value: string) {
-        return this.client.get<RequestResult<Course[]>>(`${BASE_URL}/courses/filter`, {params: {title: value}});
+        return this.client.get<RequestResult<Course[]>>(`${BASE_URL}/courses/filter`, {
+            params: { title: value }
+        });
     }
 
     getAllAuthors() {

@@ -1,9 +1,10 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Course} from "@shared/intarfaces/course.interface";
-import {NgIf} from "@angular/common";
+import {AsyncPipe, NgIf} from "@angular/common";
 import {SharedModule} from "@shared/shared.module";
-import {CoursesStoreService} from "@app/services/courses-store.service";
+import {CoursesStateFacade} from "@app/store/courses/courses.facade";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-edit-course-page',
@@ -13,23 +14,26 @@ import {CoursesStoreService} from "@app/services/courses-store.service";
   imports: [
     NgIf,
     forwardRef(() => SharedModule),
+    AsyncPipe,
   ]
 })
 export class EditCoursePage implements OnInit {
-  course?: Course;
+  course?: Observable<Course | null> = this.facade.course$;
 
   constructor(
       private router: Router,
-      private store: CoursesStoreService,
+      private facade: CoursesStateFacade,
       private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id')!;
-    this.course = this.store.getCourse(id);
+    if (id) {
+      this.facade.getSingleCourse(id);
+    }
   }
 
   onSubmit(course: Course) {
-    this.store.editCourse(this.course?.id!, course);
+    this.facade.editCourse(course, course.id);
     this.router.navigate(['/courses']);
   }
 

@@ -5,7 +5,7 @@
     </div>
 
     <app-courses-list
-            [courses]="courses"
+            [courses]="(courses | async) ?? []"
             [editable]="(this.userStore.isAdmin$ | async) ?? false"
             (deleteCourse)="delete($event)"
             (editCourse)="edit($event)"

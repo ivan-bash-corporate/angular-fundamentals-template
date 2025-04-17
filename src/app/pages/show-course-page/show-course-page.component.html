@@ -1,4 +1,4 @@
-<app-course-info
-                 [course]="course!"
+<app-course-info *ngIf="this.facade.course$ | async"
+                 [course]="(this.facade.course$ | async)!"
                  (backToCourses)="onBack()"
 ></app-course-info>

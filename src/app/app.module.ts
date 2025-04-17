@@ -13,6 +13,9 @@ import {AppRoutingModule} from "@app/app-routing.module";
 import {TokenInterceptor} from "@app/auth/interceptors/token.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthModule} from "@app/auth/auth.module";
+import {effects, reducers} from "@app/store";
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +27,8 @@ import {AuthModule} from "@app/auth/auth.module";
     RouterModule,
     AppRoutingModule,
     AuthModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(effects)
   ],
   providers: [AuthorizedGuard, NotAuthorizedGuard, CoursesService, CoursesStoreService,
     {
