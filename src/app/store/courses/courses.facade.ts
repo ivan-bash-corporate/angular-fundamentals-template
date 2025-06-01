@@ -50,7 +50,7 @@ export class CoursesStateFacade {
         this.store.dispatch(requestAllCourses());
     }
 
-    public getSingleCourse(id: number): void {
+    public getSingleCourse(id: string): void {
         this.store.dispatch(requestSingleCourse({ id }));
     }
 
@@ -58,7 +58,7 @@ export class CoursesStateFacade {
         this.store.dispatch(requestFilteredCourses({ title }));
     }
 
-    public editCourse(course: Course, id: number): void {
+    public editCourse(course: Course, id: string): void {
         this.store.dispatch(requestEditCourse({ course, id }));
     }
 
@@ -66,7 +66,7 @@ export class CoursesStateFacade {
         this.store.dispatch(requestCreateCourse({ course }));
     }
 
-    public deleteCourse(id: number): void {
+    public deleteCourse(id: string): void {
         this.store.dispatch(requestDeleteCourse({ id }));
     }
 }

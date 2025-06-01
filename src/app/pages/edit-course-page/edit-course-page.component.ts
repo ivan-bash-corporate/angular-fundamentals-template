@@ -28,12 +28,12 @@ export class EditCoursePage implements OnInit {
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id')!;
     if (id) {
-      this.facade.getSingleCourse(+id);
+      this.facade.getSingleCourse(id);
     }
   }
 
   onSubmit(course: Course) {
-    this.facade.editCourse(course, course.id);
+    this.facade.editCourse(course, course.id.toString());
     this.router.navigate(['/courses']);
   }
 

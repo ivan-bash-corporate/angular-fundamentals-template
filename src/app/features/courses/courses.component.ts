@@ -38,7 +38,7 @@ export class CoursesComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.facade.deleteCourse(id);
+    this.facade.deleteCourse(id.toString());
   }
 
   show(id: number) {
