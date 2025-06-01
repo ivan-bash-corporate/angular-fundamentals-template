@@ -74,7 +74,7 @@ export class CoursesEffects {
         this.actions$.pipe(
             ofType(requestSingleCourse),
             mergeMap(action =>
-                this.coursesService.getCourse(action.id).pipe(
+                this.coursesService.getCourse(+action.id).pipe(
                     map(res =>
                         res.successful
                             ? requestSingleCourseSuccess({ course: res.result })
@@ -92,7 +92,7 @@ export class CoursesEffects {
         this.actions$.pipe(
             ofType(requestDeleteCourse),
             mergeMap(action =>
-                this.coursesService.deleteCourse(action.id).pipe(
+                this.coursesService.deleteCourse(+action.id).pipe(
                     map(res =>
                         res.successful
                             ? requestAllCourses()
@@ -110,7 +110,7 @@ export class CoursesEffects {
         this.actions$.pipe(
             ofType(requestEditCourse),
             mergeMap(action =>
-                this.coursesService.editCourse(action.id, action.course).pipe(
+                this.coursesService.editCourse(+action.id, action.course).pipe(
                     map(res =>
                         res.successful
                             ? requestEditCourseSuccess({ course: res.result })

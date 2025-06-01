@@ -23,7 +23,7 @@ export class ShowCoursePage implements OnInit {
 
   ngOnInit(): void {
       let id = this.route.snapshot.paramMap.get('id')!;
-      this.facade.getSingleCourse(id);
+      this.facade.getSingleCourse(+id);
   }
 
   onBack() {

@@ -31,10 +31,6 @@ export class CourseComponent implements OnInit{
   ngOnInit(): void {
     this.courseForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2)]],
-      description: ['', [Validators.required, Validators.minLength(2)]],
-      duration: [0, [Validators.required, Validators.min(0)]],
-      author: ['', [Validators.pattern(/^[A-Za-z0-9\s]+$/)]],
-      authors: this.fb.array([], [Validators.required]),
     });
 
 
@@ -45,17 +41,6 @@ export class CourseComponent implements OnInit{
     if (this.course) {
       this.courseForm.patchValue({
         title: this.course.title,
-        description: this.course.description,
-        duration: this.course.duration,
-      });
-
-      this.course.authors.forEach((author) => {
-        this.authorsArray.push(
-            this.fb.group({
-              id: [author],
-              name: [this.availableAuthors.find((a) => a.id === author)?.name],
-            })
-        );
       });
     }
   }
